@@ -52,7 +52,7 @@ class TestHBNBCommand(unittest.TestCase):
             with self.assertRaises(sqlalchemy.exc.OperationalError):
                 cons.onecmd('create User')
             clear_stream(cout)
-            cons.onecmd('create User email="google42@gmail.com" password="1312"')
+            cons.onecmd('create User email="g42@gmail.com" password="1312"')
             mdl_id = cout.getvalue().strip()
             dbc = MySQLdb.connect(
                 host=os.getenv('HBNB_MYSQL_HOST'),
@@ -65,7 +65,7 @@ class TestHBNBCommand(unittest.TestCase):
             cursor.execute('SELECT * FROM users WHERE id="{}"'.format(mdl_id))
             result = cursor.fetchone()
             self.assertTrue(result is not None)
-            self.assertIn('google42@gmail.com', result)
+            self.assertIn('g42@gmail.com', result)
             self.assertIn('1312', result)
             cursor.close()
             dbc.close()
@@ -97,7 +97,7 @@ class TestHBNBCommand(unittest.TestCase):
             cons.onecmd('count State')
             cursor.close()
             dbc.close()
-    
+
     @unittest.skipIf(
         os.getenv('HBNB_TYPE_STORAGE') != 'db', 'DBStorage test')
     def test_db_show(self):
