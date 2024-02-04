@@ -2,12 +2,12 @@
 # Install and configure a web server
 
 # Install Nginx if it not already installed
-if [[ -z $(which nginx) ]]; then
+if [[ -z $(command -v nginx) ]]; then
 	
 	apt-get -y update
 	apt-get -y install nginx
 	
-	if [[ -n $(which ufw) ]]; then
+	if [[ -n $(command -v ufw) ]]; then
 		ufw allow 'Nginx HTTP'
 	fi
 
